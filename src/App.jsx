@@ -1,6 +1,6 @@
 import './App.css'
 import Card from './components/Card/Card'
-import Data from './components/Data/Data'
+
 
 function App() {
   
@@ -13,7 +13,7 @@ function App() {
       
       </div>
       <div>
-        
+
       </div>
       
           

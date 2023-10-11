@@ -28,17 +28,17 @@ const Card = () => {
                    {
                     cards.map((Card) =>  (
                       
-                        <div key={Card.btn} className="">
+                        <div key={Card.id} className="">
                         <div className="w-96 bg-white shadow-xl rounded-xl">
                         <figure className="px-12 pt-4">
-                            <img src="https://i.ibb.co/XY1tmwH/Rectangle-2-2.png" />
+                            <img src={Card.cover} />
                         </figure>
                         <div className="card-body items-center text-center">
-                        <h2 className=" font-bold text-xl pt-4">Introduction to C Programming</h2>
-                        <p className="pt-4 text-start pl-11 text-slate-600">It is a long established fact that a reader <br /> will be distracted by the readable content <br/>of a page when looking at its layout.</p>
+                        <h2 className=" font-bold text-xl pt-4">{Card.titel}</h2>
+                        <p className="pt-4 text-start pl-11 text-slate-600">{Card.paragraph}</p>
                         <div className="flex gap-14 pl-14 pt-4">
-                         <p>Prices</p>
-                         <p>Credit</p>
+                         <p>Prices : {Card.price}</p>
+                         <p>Credit: {Card.credit} hr</p>
                          </div>
                         <div className="card-actions pt-4 pb-2">
                         <button className="btn btn-wide w-80 h-12 px-12 bg-blue-500 text-white rounded-xl">Select</button>
