@@ -1,17 +1,50 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-unused-vars */
 import { useEffect } from "react";
 import { useState } from "react";
+import Data from "../data/Data";
+
 
 
 
 
 const Card = () => {
      const[cards, setCards] = useState([]);
+     const[selectCard, setSelectCard] = useState ([]);
+     const[remaning, setRemaning] = useState (0);
+     const[totalcost, setTotalcost] = useState (0);
 
       useEffect( () => {
              fetch('carddata.json')
              .then(res => res.json())
              .then(data => setCards(data))
-     }, [])
+     }, []);
+
+
+            const handleCardinfo = (Card)=>{
+                const isExist = selectCard.find((item) => item.id == Card.id);
+
+                let count = Card.price;
+
+                if (isExist){
+                    return alert("Already Your Select This Item");
+                } else {
+                    selectCard.forEach((item) => {
+                        count = count + item.price;
+                    });
+
+                    const totalRemaning = 50000 - count;
+
+                    setTotalcost(count);
+                    console.log(totalRemaning);
+                    setSelectCard([...selectCard, Card]);
+                }
+                
+            };
+           
+
+
+
     return (
         <div className="bg-gray-100">
             
@@ -22,7 +55,7 @@ const Card = () => {
 
             
             
-             <div className="pl-14 justify-between gap-4 grid grid-cols-3 pr-14 pt-8">
+             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mx-6  pt-8 ">
                                                
                 
                    {
@@ -34,14 +67,14 @@ const Card = () => {
                             <img src={Card.cover} />
                         </figure>
                         <div className="card-body items-center text-center">
-                        <h2 className=" font-bold text-xl pt-4">{Card.titel}</h2>
-                        <p className="pt-4 text-start pl-11 text-slate-600">{Card.paragraph}</p>
-                        <div className="flex gap-14 pl-14 pt-4">
-                         <p>Prices : {Card.price}</p>
-                         <p>Credit: {Card.credit} hr</p>
+                        <h2 className=" font-bold text-xl pt-4">{Card.title}</h2>
+                        <p className="pt-4 text-start pl-11 pr-11 text-slate-600">{Card.paragraph}</p>
+                        <div className="flex gap-14 pl-10 pt-4">
+                         <p>$ Prices : {Card.price}</p>
+                         <p> Credit: {Card.credit} hr</p>
                          </div>
                         <div className="card-actions pt-4 pb-2">
-                        <button className="btn btn-wide w-80 h-12 px-12 bg-blue-500 text-white rounded-xl">Select</button>
+                        <button onClick={()=>handleCardinfo(Card)} className="btn btn-wide w-80 h-12 px-12 bg-blue-500 text-white rounded-xl">Select</button>
                             </div>
                             </div>
                             </div>
@@ -52,21 +85,8 @@ const Card = () => {
                    }
 
                     <div className=" pt-8 ">
+                    <Data selectCard={selectCard} remaning={remaning}></Data>
                     
-                    <div className="card w-96 bg-white shadow-xl"> 
-                    <div className="card-body items-center text-center">
-                    <h1 className="font-bold text-2xl pt-2 pb-2 text-blue-500">Credit Hour Remaining  hr</h1>
-                    <hr />
-                    <h2 className="font-bold pt-2 text-xl">Course Name</h2>
-                    <br />
-                    <br />
-                    <br />
-                    <hr />
-                    <h3 className="font-bold pt-2 pb-2">Total Credit Hour : </h3>
-                    <hr />
-                    <h2 className="font-bold pt-2">Total Price : </h2>
-                    </div>
-                    </div>
                   </div>    
                  
                </div>   
